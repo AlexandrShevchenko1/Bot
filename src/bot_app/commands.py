@@ -6,8 +6,7 @@ from . data_fetcher import get_week_events, get_day_events, register_user_func, 
 from . keyboards import inline_kb#, inline_kb_lr код без # не запускается
 from aiogram import Bot
 import datetime
-import telegram
-from telegram.constants import ParseMode
+from aiogram.types import ParseMode
 from . functions import *
 from aiogram.dispatcher import FSMContext
 from bot_app.states import GameStates
@@ -55,14 +54,14 @@ async def buttom_click_call_back(callback_query: types.CallbackQuery):
         if (text == ""):
             await bot.send_message(callback_query.from_user.id, "Nothing scheduled for this date.")
         else: 
-            await bot.send_message(callback_query.from_user.id, text, parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await bot.send_message(callback_query.from_user.id, text, parse_mode=ParseMode.MARKDOWN)
     elif (answer == "Day events"):  
         jsonString = await get_day_events(get_date.date, token) 
         text= retrieveDayEventData(jsonString)
         if (text == ""):
-            await bot.send_message(callback_query.from_user.id, "Nothing scheduled for this date.", parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await bot.send_message(callback_query.from_user.id, "Nothing scheduled for this date.", parse_mode=ParseMode.MARKDOWN)
         else: 
-            await bot.send_message(callback_query.from_user.id, text, parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await bot.send_message(callback_query.from_user.id, text, parse_mode=ParseMode.MARKDOWN)
 
 
 
@@ -71,15 +70,15 @@ async def buttom_click_call_back(callback_query: types.CallbackQuery):
 async def register_user_and_assign_token(message: types.Message):
                 user_data = message.text.split()
                 if (len(user_data) != 3):
-                    await message.reply("wrong data provided", parse_mode=telegram.constants.ParseMode.MARKDOWN)
+                    await message.reply("wrong data provided", parse_mode=ParseMode.MARKDOWN)
                 else:
                     res = await register_user_func(user_data[1], user_data[2])
                     if (res.get('password') != None):
-                        await message.reply('This password is too short. It must contain at least 8 characters.', parse_mode=telegram.constants.ParseMode.MARKDOWN)
+                        await message.reply('This password is too short. It must contain at least 8 characters.', parse_mode=ParseMode.MARKDOWN)
                     elif (res.get('username') != None and res.get('id') == None):
-                        await message.reply('A user with that username already exists.', parse_mode=telegram.constants.ParseMode.MARKDOWN)
+                        await message.reply('A user with that username already exists.', parse_mode=ParseMode.MARKDOWN)
                     elif (res.get('username') != None and res.get('id') != None):
-                        await message.reply(f'*{user_data[1]} was registered*', parse_mode=telegram.constants.ParseMode.MARKDOWN)
+                        await message.reply(f'*{user_data[1]} was registered*', parse_mode=ParseMode.MARKDOWN)
                         await GameStates.OK.set()
                         # в поле я тожен сохранить is_staf - true либо false (реализовать отдельные запрос - вывод инфы о юзере)
                         register_user_and_assign_token.userName_token = { user_data[1]: (await login_and_get_token(user_data[1], user_data[2]))['auth_token']}
@@ -92,7 +91,7 @@ async def register_user_and_assign_token(message: types.Message):
 async def login(message: types.Message):
     data = message.text.split(' ')
     if (len(data) != 3):
-        await message.reply("*Incorrect format*", parse_mode=telegram.constants.ParseMode.MARKDOWN)
+        await message.reply("*Incorrect format*", parse_mode=ParseMode.MARKDOWN)
     else:
         if ("auth_token" in (await post_request_status(data[1], data[2]))):
 
@@ -102,7 +101,7 @@ async def login(message: types.Message):
             # нужно получить значение перменной is_staff
             login.is_staff = (await get_full_user_info(f"{login.id}"))["is_staff"]
 
-            await message.reply(f"*Success! You logged in*", parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await message.reply(f"*Success! You logged in*", parse_mode=ParseMode.MARKDOWN)
             await GameStates.OK.set()
         else:
-            await message.reply("*Incorrect login password*", parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await message.reply("*Incorrect login password*", parse_mode=ParseMode.MARKDOWN)
