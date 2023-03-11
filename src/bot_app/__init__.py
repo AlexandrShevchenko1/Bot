@@ -1,6 +1,6 @@
 import logging
 from . app import dp
-from . import commands, time_table
+from . import commands
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO) 
 
