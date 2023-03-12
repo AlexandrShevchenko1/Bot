@@ -1,4 +1,4 @@
-from aiogram.types import KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 inline_button_week_events = InlineKeyboardButton("Week events", callback_data="Week events")
 inline_button_day_events = InlineKeyboardButton("Day events", callback_data="Day events")
