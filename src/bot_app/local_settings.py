@@ -1,5 +1,5 @@
 import os
-HOST_IP: str = os.environ.get("DJANGO_HOST", "http://127.0.0.1")
+HOST_IP: str = os.environ.get("DJANGO_HOST", "127.0.0.1")
 
 API_KEY = "6157472072:AAHFbAuPEgLvUAa82-PyqTwRX8GrhGBLZfA"
 WEEK_EVENTS_URL: str = f"http://{HOST_IP}:8000/api/v1/week/"
