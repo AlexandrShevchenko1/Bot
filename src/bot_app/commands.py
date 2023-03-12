@@ -57,14 +57,14 @@ async def buttom_click_call_back(callback_query: types.CallbackQuery):
         if (text == ""):
             await bot.send_message(callback_query.from_user.id, "Nothing scheduled for this date.")
         else: 
-            await bot.send_message(callback_query.from_user.id, text, parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await bot.send_message(callback_query.from_user.id, text, parse_mode=ParseMode.MARKDOWN)
     elif (answer == "Day events"):  
         jsonString = await get_day_events(get_date.date, token) 
         text= retrieveDayEventData(jsonString)
         if (text == ""):
-            await bot.send_message(callback_query.from_user.id, "Nothing scheduled for this date.", parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await bot.send_message(callback_query.from_user.id, "Nothing scheduled for this date.", parse_mode=ParseMode.MARKDOWN)
         else: 
-            await bot.send_message(callback_query.from_user.id, text, parse_mode=telegram.constants.ParseMode.MARKDOWN)
+            await bot.send_message(callback_query.from_user.id, text, parse_mode=ParseMode.MARKDOWN)
 
 
 
@@ -302,4 +302,3 @@ async def add_to_group(message: types.Message):
 # /createGroup + croupName
 # @dp.message_handler(commands=['createGroup'], state=GameStates.OK)
 # async def creater_group(message: types.Message):
-     

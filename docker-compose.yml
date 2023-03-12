@@ -1,0 +1,8 @@
+version: "1.0"
+
+services:
+  timetable_bot:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: timetable_bot:v1.0
