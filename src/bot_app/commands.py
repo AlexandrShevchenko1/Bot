@@ -76,11 +76,8 @@ async def register_user_and_assign_token(message: types.Message):
                     await message.reply("*Wrong data provided*", parse_mode=telegram.constants.ParseMode.MARKDOWN)
                 else:
                     res = await register_user_func(user_data[1], user_data[2])
-                    if (res.get('password') != None):
-                        await message.reply('This password is too short. It must contain at least 8 characters.', parse_mode=telegram.constants.ParseMode.MARKDOWN)
-                    elif (res.get('username') != None and res.get('id') == None):
-                        await message.reply('A user with that username already exists.', parse_mode=telegram.constants.ParseMode.MARKDOWN)
-                    elif (res.get('username') != None and res.get('id') != None):
+
+                    if (res.get('username') != None and res.get('email') != None and res.get('id') != None ):
                         await message.reply(f'*{user_data[1]} was registered*', parse_mode=telegram.constants.ParseMode.MARKDOWN)
                         await GameStates.OK.set()
                         # в поле я тожен сохранить is_staf - true либо false (реализовать отдельные запрос - вывод инфы о юзере)
@@ -89,6 +86,16 @@ async def register_user_and_assign_token(message: types.Message):
                         register_user_and_assign_token.curr_userName = user_data[1]
                         register_user_and_assign_token.id = (await get_user_info(register_user_and_assign_token.userName_token[user_data[1]]))["id"]
                         send_welcome.is_staff = (await get_full_user_info(f"{register_user_and_assign_token.id}"))["is_staff"]
+                    elif (res == {"username": ["A user with that username already exists."]}):
+                        await message.reply('A user with that username already exists.')
+                    elif (res == {
+    "username": [
+        "Enter a valid username. This value may contain only letters, numbers, and @/./+/-/_ characters."
+    ]
+}):
+                         await message.reply('Enter a valid username.')
+                    else:
+                        await message.reply('This password is too short. It must contain at least 8 characters.')
 
 
 
