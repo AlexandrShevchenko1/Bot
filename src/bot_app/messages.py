@@ -7,10 +7,17 @@ Please log in or create a new account:
 '''
 
 HELP_MESSAGE = '''
-📝 You can contact me by commands:\n
-- /start\t\t      (start work)\n
-- /register   (register in the system)\n
-- /login  \t\t    (log in to your account)\n
-- /events     (get a list of events)\n
-- /help\t\t       (list of existing commands)
+👩‍🎓If you are a student, you can contact me using the commands:
+- /start (start work)
+- /register (register in the system)
+- /login (log in to your account)
+- /user_info + username (get user information)
+- /events + date (get a list of events)
+- /help (list of existing commands)
+
+👨‍🏫If you are a teacher, you have additional commands:
+- /add_to_group + username + group    (add student to a group)
+- /edit + id + name + group                        (edit event)
+- /edit_events + date                                   (select a event to edit)
 '''
+
