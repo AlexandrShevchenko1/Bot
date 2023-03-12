@@ -5,3 +5,6 @@ REGISTER_USER_URL = "http://127.0.0.1:8000/api/v1/users/"
 LOGIN_USER_URL = 'http://127.0.0.1:8000/api/v1/token/login/'
 USER_INFO_URL_ID = 'http://127.0.0.1:8000/api/v1/users/me'
 USER_FULL_INFO_URL = 'http://127.0.0.1:8000/api/v1/user/'
+FIND_USER_BY_USERNAME = 'http://127.0.0.1:8000/api/v1/userbyname/'
+GET_ALL_GROUPS_URL = 'http://127.0.0.1:8000/api/v1/group/'
+SHOW_EVENT_INFO_URL = 'http://127.0.0.1:8000/api/v1/event/'
