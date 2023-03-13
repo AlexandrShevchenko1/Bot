@@ -37,7 +37,9 @@ async def register_user_func(username, password) -> Union[Dict, Any]:
 # передаю данные уже авторизованного пользователя
 async def login_and_get_token(username, password) -> Union[Dict, Any]:
     async with aiohttp.ClientSession() as session:
-        async with session.post(LOGIN_USER_URL, json={'username': username, 'password': password}) as response: 
+        async with session.post(LOGIN_USER_URL, json={'username': username, 'password': password}) as response:
+            print(LOGIN_USER_URL)
+            print(response.json())
             return await response.json()
 
 async def post_request_status(username, password) -> Union[Dict, Any]:
